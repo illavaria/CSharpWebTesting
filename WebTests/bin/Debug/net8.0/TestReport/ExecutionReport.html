@@ -1,0 +1,82 @@
+<html><head>
+            <style>
+                body { font-family: Arial; padding: 20px; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { padding: 8px; border: 1px solid #ccc; }
+                .pass { background: #d4edda; }
+                .fail { background: #f8d7da;}
+                .skip { background: #fff3cd;}
+            </style>
+        </head><body><h1>Test Execution Report</h1><p><b>Timestamp:</b> 2025-12-30 23:24:17</p><p><b>Total Time:</b> 19.684 sec</p><p><b>OS:</b> Unix 15.6.1</p><p><b>.NET:</b> 8.0.10</p><h2>Test Results</h2><table><tr><th>Name</th><th>Status</th><th>Duration (s)</th><th>Message</th></tr>
+                <tr class='passed'>
+                    <td>CreateBook_DuplicateBook_ReturnsConflictOrBadRequest</td>
+                    <td>Passed</td>
+                    <td>2.673</td>
+                    <td>Create book tests finished for: CreateBook_DuplicateBook_ReturnsConflictOrBadRequest</td>
+                </tr>
+                <tr class='passed'>
+                    <td>CreateBook_ValidRequest_Returns201AndCorrectBody</td>
+                    <td>Passed</td>
+                    <td>3.422</td>
+                    <td>Create book tests finished for: CreateBook_ValidRequest_Returns201AndCorrectBody</td>
+                </tr>
+                <tr class='passed'>
+                    <td>DeleteBook_InvalidIdFormat_Returns400</td>
+                    <td>Passed</td>
+                    <td>5.687</td>
+                    <td>Delete book tests finished for: DeleteBook_InvalidIdFormat_Returns400</td>
+                </tr>
+                <tr class='passed'>
+                    <td>DeleteBook_NonExistentId_Returns404</td>
+                    <td>Passed</td>
+                    <td>6.189</td>
+                    <td>Delete book tests finished for: DeleteBook_NonExistentId_Returns404</td>
+                </tr>
+                <tr class='passed'>
+                    <td>DeleteBook_ValidId_Returns204AndBookIsNoLongerRetrievable</td>
+                    <td>Passed</td>
+                    <td>6.965</td>
+                    <td>Delete book tests finished for: DeleteBook_ValidId_Returns204AndBookIsNoLongerRetrievable</td>
+                </tr>
+                <tr class='passed'>
+                    <td>GetAllBooks_ReturnsListOfValidBooks</td>
+                    <td>Passed</td>
+                    <td>13.132</td>
+                    <td>Get all books tests finished for: GetAllBooks_ReturnsListOfValidBooks</td>
+                </tr>
+                <tr class='passed'>
+                    <td>GetBookById_InvalidIdFormat_Returns400</td>
+                    <td>Passed</td>
+                    <td>15.068</td>
+                    <td>Get by id tests finished for: GetBookById_InvalidIdFormat_Returns400</td>
+                </tr>
+                <tr class='passed'>
+                    <td>GetBookById_NonExistentId_Returns404</td>
+                    <td>Passed</td>
+                    <td>15.431</td>
+                    <td>Get by id tests finished for: GetBookById_NonExistentId_Returns404</td>
+                </tr>
+                <tr class='passed'>
+                    <td>GetBookById_ValidId_ReturnsCorrectBook</td>
+                    <td>Passed</td>
+                    <td>16.513</td>
+                    <td>Get by id tests finished for: GetBookById_ValidId_ReturnsCorrectBook</td>
+                </tr>
+                <tr class='passed'>
+                    <td>UpdateBook_InvalidIdFormat_Returns400</td>
+                    <td>Passed</td>
+                    <td>18.328</td>
+                    <td>Update book tests finished for: UpdateBook_InvalidIdFormat_Returns400</td>
+                </tr>
+                <tr class='passed'>
+                    <td>UpdateBook_NonExistentId_Returns404</td>
+                    <td>Passed</td>
+                    <td>18.696</td>
+                    <td>Update book tests finished for: UpdateBook_NonExistentId_Returns404</td>
+                </tr>
+                <tr class='passed'>
+                    <td>UpdateBook_ValidData_UpdatesBookAndReturnsUpdatedData</td>
+                    <td>Passed</td>
+                    <td>19.682</td>
+                    <td>Update book tests finished for: UpdateBook_ValidData_UpdatesBookAndReturnsUpdatedData</td>
+                </tr></table></body></html>

@@ -2,17 +2,24 @@ using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.WebUtilities;
 using WebTests.models;
+using Allure.NUnit;
+using NLog;
 
 namespace WebTests;
 
+[AllureNUnit]
 public class TestGetAll: TestBase
 {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     private List<string> _testBookIds = [];
     private List<BookCreate> _books = [];
 
     [SetUp]
     public async Task Setup()
     {
+        Logger.Info("Setting up TestGetAll.");
+
         for (var i = 0; i < 3; i++)
         {
             var create_book = new BookCreate
@@ -35,6 +42,8 @@ public class TestGetAll: TestBase
     [Test]
     public async Task GetAllBooks_ReturnsListOfValidBooks()
     {
+        Logger.Info("Starting GetAllBooks_ReturnsListOfValidBooks.");
+
         var uri = QueryHelpers.AddQueryString(
             _booksEndpoint,
             "Take",
@@ -58,15 +67,21 @@ public class TestGetAll: TestBase
             Assert.That(book.PublishedDate, Is.EqualTo(originalBook.PublishedDate));
             Assert.That(book.ISBN, Is.EqualTo(originalBook.ISBN));
         }
+
+        Logger.Info("Finished GetAllBooks_ReturnsListOfValidBooks.");
     }
     
     [TearDown]
     public async Task TearDown()
     {
+        Logger.Info("Tearing down TestGetAll.");
+
         foreach (var testBookId in _testBookIds)
         {
             await _client.DeleteAsync(
                         $"{TestConfig.Config["ApiSettings:BooksEndpoint"]}/{testBookId}");
         }
+
+        TestReportCollector.Record($"Get all books tests finished for: {TestContext.CurrentContext.Test.Name}");
     }
 }

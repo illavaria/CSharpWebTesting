@@ -1,17 +1,24 @@
 using System.Net;
 using System.Net.Http.Json;
 using WebTests.models;
+using Allure.NUnit;
+using NLog;
 
 namespace WebTests;
 
+[AllureNUnit]
 public class TestUpdate: TestBase
 {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     private string _testBookId;
     private BookCreate _originalBook;
 
     [SetUp]
     public async Task Setup()
     {
+        Logger.Info("Setting up TestUpdate.");
+
         _originalBook = new BookCreate
         {
             Title = "Update Test Book",
@@ -30,6 +37,8 @@ public class TestUpdate: TestBase
     [Test]
     public async Task UpdateBook_ValidData_UpdatesBookAndReturnsUpdatedData()
     {
+        Logger.Info("Starting UpdateBook_ValidData_UpdatesBookAndReturnsUpdatedData.");
+
         var updateRequest = new BookCreate
         {
             Title = "Updated Title",
@@ -45,11 +54,14 @@ public class TestUpdate: TestBase
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
 
+        Logger.Info("Finished UpdateBook_ValidData_UpdatesBookAndReturnsUpdatedData.");
     }
 
     [Test]
     public async Task UpdateBook_NonExistentId_Returns404()
     {
+        Logger.Info("Starting UpdateBook_NonExistentId_Returns404.");
+
         var nonExistentId = Guid.NewGuid().ToString();
 
         var updateRequest = new BookCreate
@@ -66,11 +78,15 @@ public class TestUpdate: TestBase
         );
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+
+        Logger.Info("Finished UpdateBook_NonExistentId_Returns404.");
     }
 
     [Test]
     public async Task UpdateBook_InvalidIdFormat_Returns400()
     {
+        Logger.Info("Starting UpdateBook_InvalidIdFormat_Returns400.");
+
         var invalidId = "invalid-id";
 
         var updateRequest = new BookCreate
@@ -87,14 +103,20 @@ public class TestUpdate: TestBase
         );
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+
+        Logger.Info("Finished UpdateBook_InvalidIdFormat_Returns400.");
     }
 
     [TearDown]
     public async Task TearDown()
     {
+        Logger.Info("Tearing down TestUpdate.");
+
         if (!string.IsNullOrEmpty(_testBookId))
         {
             await _client.DeleteAsync($"{_booksEndpoint}/{_testBookId}");
         }
+
+        TestReportCollector.Record($"Update book tests finished for: {TestContext.CurrentContext.Test.Name}");
     }
 }
